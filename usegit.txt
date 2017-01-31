@@ -87,6 +87,15 @@
 	$git config —-global color.ui true	#让命令输出更醒目
 2.忽略特殊文件
 	在Git工作区的根目录下创建一个特殊的.gitignore文件，将要忽略的文件的文件名放入其中
-
+3.配置别名
+	$git config —-global alias.st status	#用st代替status命令
+	$git config —-global alias.co checkout
+	$git config —-global alias.unstage’reset HEAD’
+4.配置文件
+	—-global	#针对当前用户，全局变量
+			 不加，只对当前仓库起作用
+	.git/config	#每个仓库的Git配置文件放置的位置
+			 删掉对应行即可删掉别名
+	.gitconfig	#当前用户的Git配置文件
 
 	
