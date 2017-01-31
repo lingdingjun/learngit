@@ -1,0 +1,92 @@
+创建git版本库
+本地版本库
+1.在合适的地方建立空的目录
+	$mkdir learngit
+	$cd learngit
+	$pwd
+2.变成git仓库
+	$git init
+3.添加文件（要在目录下进行）
+	$git add readme.txt	#把文件添加到仓库 
+				 存储在暂存区
+	$git commit -m ‘某个版本’		#把暂存区的某个版本提交到仓库  
+ 					‘’里为这次提交的说明
+4.查看仓库状态
+	$git status 	#仓库当前的状态
+	$git diff 	#仓库里的文件进行了怎样的修改
+	$git diff HEAD —-readme.txt	#查看工作区和版本库中最新版本的区别
+5.查看历史信息
+	$git log 	#显示从近到远的提交日志
+	$git log —-pretty=oneline 	#显示提交ID（commit id)和提交说明
+6.退回版本
+	$git reset —hard HEAD^ 	#退回上一个版本 HEAD表示当前版本
+					     HEAD^表示上一版本
+					     HEAD-10表示往上十个版本
+7.重回较晚的版本
+	$git reset —hard 3456789	#找到某个版本说明的commit id，只需前几位
+8.关闭shell后重新找回的方法
+	$git reflog 	#找到每一次命令的记录
+	$cat ready.txt	#显示readme.txt的全部内容
+9.撤销修改
+	$git checkout —-readme.txt	#放弃工作区的修改，回到版本库或者暂存区的状态
+	$git reset HEAD readme.txt	#撤销暂存区的修改，重新放回工作区
+10.删除文件
+	$rm test.txt
+	$git rm test.txt	#从版本库中删除该文件
+	$git commit -m’remove test.txt’		#将删除提交到版本库
+	$git checkout —test.txt 	#将误删的文件恢复到最新版本
+					 but，会丢失最近一次提交后修改的内容
+远程仓库
+1.添加远程库
+	#登陆GitHub，右上角Create a new repo,建立一个新仓库
+	 Repository name填入要建立的Git库的名字
+	在本地：
+	$git remote add origin git@github.com:lingdingjun/learngit.git
+			#添加一个远程库名为origin
+	把本地库的所有内容推送到远程库上：
+	$git push -u origin master	#把本地库的当前分支master分支推送到远程
+					 -u 不仅推送master分支内容，还关联本地和远程
+	$git push origin master		#把本地master分支的最新修改推送到GitHub
+2.从远程端克隆
+	$git clone git@github.com:lingdingjun/gitskills.git
+分支管理（先创建分支再合并可减少风险）
+1.创建分支
+	$git checkout -b dev	#创建并切换到dev分支
+	$git branch dev		#创建dev分支
+	$git checkout dev	#切换到dev分支
+	$git branch	#查看当前分支，会显示所有分支，在当前分支前有*
+2.合并分支
+	$git checkout master	#切换回master分支，再进行合并
+	$git merge dev		#把dev分支的内容合并到master（当前分支）
+	$git branch -d dev	#删除dev分支
+
+分支未完／／／／／
+
+标签管理
+1.创建标签
+	$git branch	#查看所有分支
+	$git checkout master	#切换到master分支
+	$git tag v1.0	#打一个v1.0的标签，默认打在最新的commit id 上
+	$git tag v1.0 234567	#在commit id为234567的commit上打标签
+	$git tag	#查看所有标签，按字母排序
+	$git tag -a v0.1 -m ‘version 0.1 released’ 366666	#-a指定标签名
+								 -m指定说明文字
+	$git show v0.9	#查看v0.9点标签信息
+2.操作标签
+	$git tag -d v0.1	#删除本地标签
+	$git push origin v1.0	#推送v1.0到远程
+	$git push origin —-tags	#一次性推送全部尚未推送到远程的本地标签
+	$git push origin :refs/tags/v0.9	#删除远程端的标签
+						 要先删除本地端
+使用GitHub
+	在GitHub上可以任意Fork开源仓库
+	自己拥有Fork后的仓库的读写权限
+	可以推送pull request给官方仓库贡献代码
+自定义Git
+1.让Git显示颜色
+	$git config —-global color.ui true	#让命令输出更醒目
+2.忽略特殊文件
+	在Git工作区的根目录下创建一个特殊的.gitignore文件，将要忽略的文件的文件名放入其中
+
+
+	
